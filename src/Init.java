@@ -4,9 +4,7 @@ public class Init {
     ArrayList<Kiste> dummyKisten = new ArrayList<>();
     ArrayList<Artikel> dummyArtikel = new ArrayList<>();
 
-    public Init(ArrayList<Kiste> dummyKisten, ArrayList<Artikel> dummyArtikel) {
-        this.dummyKisten = dummyKisten;
-        this.dummyArtikel = dummyArtikel;
+    public Init() {
         makeDummyKisten();
         makeDummyArtikel();
     }
