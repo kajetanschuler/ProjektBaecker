@@ -48,7 +48,7 @@ public class DisplayManager {
                         );
                     }
                 }),
-                new KeyFrame(Duration.millis(1000))
+                new KeyFrame(Duration.millis(350))
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -72,7 +72,6 @@ public class DisplayManager {
 
         liveData.add(new Label(""), 0, 1);
         liveData.add(new Label(""), 0, 2);
-
 
     }
 
