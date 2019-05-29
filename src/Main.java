@@ -10,37 +10,28 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     public static DisplayManager displayManager;
+    public static Init artikelData;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         displayManager = new DisplayManager(primaryStage);
+        artikelData = new Init();
+        startCalculator();
 
-
+        // Testing: Which comPorts exist?
         SerialPort comPort[] = SerialPort.getCommPorts();
 
-        NFCController nfcController = new NFCController();
+        // Start NFC Detection in new Thread
 
         Thread thread = new Thread(){
             public void run(){
-                nfcController.startNFC();
+                NFCController nfcController = new NFCController();
             }
         };
 
+        // Todo: Automatischer Start von StartNFC bei Constructuor Aufruf
         thread.start();
-        /*String test = "00 21 12 31 34 12  Fil:15....\n " +
-                "02 20 12 34 13 14 Art:Dinkelbrot...";
-        //test = test.replaceAll("\\s", "");
-        String parts[] = test.split("\n+");
-        System.out.println(parts[0]);
-        System.out.println(parts[1]);
-*/
-/*        if (test.contains("Fil")) {
-            int index = test.indexOf(":");
-            System.out.println(index);
-            int index2 = test.indexOf(".");
-            System.out.println(index2);
-        }*/
-
 
     }
 
@@ -48,7 +39,13 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void setText(String text, int labelId) {
-        displayManager.setLabelText(text, labelId);
+    public static void startScaleController(Retoure retoure) {
+        ScaleController scaleController = new ScaleController(retoure);
     }
+
+    public static void startCalculator() {
+        Calculator calculator = new Calculator(new Retoure(12, "Bretzel"));
+        calculator.calculateAmount();
+    }
+
 }

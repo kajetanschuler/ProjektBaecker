@@ -11,39 +11,48 @@ public class NFCController {
     private String fil;
 
     public NFCController() {
+        startNFC();
+
     }
 
-    public void startNFC () {
+    /**
+     *
+     */
+    public void startNFC() {
+        // Todo: Ports auslesen bei Julia --> String möglich?
         SerialPort comPort = SerialPort.getCommPorts()[7];
         comPort.setBaudRate(115200);
         comPort.openPort();
         chars = new ArrayList<>();
         comPort.addDataListener(new SerialPortPacketListener() {
-        @Override
-        public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_RECEIVED; }
-
-        @Override
-        public int getPacketSize() { return 136; }
-
-        @Override
-        public void serialEvent(SerialPortEvent event)
-        {
-            byte[] newData = event.getReceivedData();
-            System.out.println("Received data of size: " + newData.length);
-            for (int i = 0; i < newData.length; ++i) {
-                System.out.print((char)newData[i]);
-                chars.add((char) newData[i]);
+            @Override
+            public int getListeningEvents() {
+                return SerialPort.LISTENING_EVENT_DATA_RECEIVED;
             }
 
-            transformString(chars);
+            @Override
+            public int getPacketSize() {
+                return 134;
+            }
+
+            @Override
+            public void serialEvent(SerialPortEvent event) {
+                byte[] newData = event.getReceivedData();
+                System.out.println("Received data of size: " + newData.length);
+                for (int i = 0; i < newData.length; ++i) {
+                    System.out.print((char) newData[i]);
+                    chars.add((char) newData[i]);
+                }
+
+                transformString(chars);
 
 
-            System.out.println("\n");
-        }
-    });
+                System.out.println("\n");
+            }
+        });
     }
 
-
+/*
 
     public void startNFCHandler () {
 
@@ -102,46 +111,55 @@ public class NFCController {
             in.close();
         } catch (Exception e) { e.printStackTrace(); }
         comPort.closePort();
-    }
+    }*/
 
-    private void transformString (ArrayList<Character> data) {
+    /**
+     *
+     * @param data
+     */
+    private void transformString(ArrayList<Character> data) {
+
+        // Build String from Array List
         StringBuilder stringBuilder = new StringBuilder(data.size());
-        for (char c: data) {
+        for (char c : data) {
             stringBuilder.append(c);
 
         }
         String kiste = stringBuilder.toString();
-        kiste = kiste.substring(2);
+
+        // Split Strings at new line
         String[] parts = kiste.split("\r\n");
 
-
+        // Extract Indices of relevant data
         int fil1 = parts[0].indexOf(":") + 1;
         int fil2 = parts[0].indexOf(".");
-
         int art1 = parts[1].indexOf(":") + 1;
         int art2 = parts[1].indexOf(".");
 
-        fil = "Filiale: " + parts[0].substring(fil1, fil2) + " - Artikel: " + parts[1].substring(art1, art2);
+        // Todo: Exception Handling
+        // Create String/Int for Label and Retoure Object
+        int filiale = Integer.parseInt(parts[0].substring(fil1, fil2));
+        String artikel = parts[1].substring(art1, art2);
 
+        fil = "Filiale: " + filiale + " - Artikel: " + artikel;
+
+        // Create Retoure Object from extracted data
+        Retoure retoure = new Retoure(filiale, artikel);
+
+        // Give Object to Main and start Scale Controller
+        Main.startScaleController(retoure);
+
+        // Update FX Elements through this code snippet
         Platform.runLater(new Runnable() {
             public void run() {
                 Main.displayManager.setLabelText(fil, 0);
             }
         });
 
+        // delete contents of ArrayList for next Serial Event
         chars.clear();
 
     }
-
-    private void printNewData (byte[] newData) {
-        for (int i = 0; i < newData.length; i++) {
-            Character c = ((char) newData[i]);
-            chars.add(c);
-        }
-        transformString(chars);
-    }
-
-    public ArrayList<Character> getChars() {
-        return chars;
-    }
 }
+
+// Todo: Timer um Seriellen Port zu resetten

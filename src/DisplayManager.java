@@ -18,13 +18,17 @@ public class DisplayManager {
     private Timeline timeline;
     private ColumnConstraints cC;
 
-
+    // Constructor for the display Manager - sets up windows
     public DisplayManager(Stage primaryStage) {
         this.primaryStage = primaryStage;
         initializeWindows();
 
     }
 
+    /**
+     *
+     */
+    // Make GridLayout, Labels and Constraints
     private void initializeWindows () {
 
         // initialize GridPane
@@ -37,6 +41,8 @@ public class DisplayManager {
         gridPane.getColumnConstraints().addAll(cC, cC, cC);
 
         status   = new Label("Warte auf NFC-Tag");
+
+        // create animation for NFC Label
         timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new EventHandler() {
                     @Override public void handle(Event event) {
@@ -52,6 +58,9 @@ public class DisplayManager {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
 
+        // Set labels
+        gewicht = new Label("Hier kommt später das Gewicht rein");
+        anzahl = new Label("Hier kommt Anzahl rein");
 
         // Prepare and Show Stage
         Scene scene = new Scene(gridPane);
@@ -61,6 +70,7 @@ public class DisplayManager {
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
+        // Todo: Add more labels
         GridPane liveData = new GridPane();
         cC.setPercentWidth(100);
         liveData.getColumnConstraints().addAll(cC);
@@ -70,16 +80,22 @@ public class DisplayManager {
         gridPane.add(liveData, 1, 0);
 
 
-        liveData.add(new Label(""), 0, 1);
-        liveData.add(new Label(""), 0, 2);
+        liveData.add(gewicht, 0, 1);
+        liveData.add(anzahl, 0, 2);
 
     }
 
+    /**
+     * Set Text in Label
+     * @param text
+     * @param labelId
+     */
     public void setLabelText (String text, int labelId) {
         switch (labelId) {
             case 0:
                 status.setText(text);
                 pauseTimeline();
+                // Todo: Timer für Reset des Labels
                 break;
 
             case 1:
@@ -94,6 +110,11 @@ public class DisplayManager {
 
     }
 
+    // Todo: Add function that adds GridPane live Data for reset and initialization
+
+    /**
+     *
+     */
     private void pauseTimeline() {
         timeline.pause();
     }
