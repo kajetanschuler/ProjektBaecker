@@ -101,6 +101,7 @@ public class DisplayManager {
             case 1:
                 gewicht.setText(text);
                 break;
+                // Todo: Set Animation with regard to given Text
 
             case 2:
                 anzahl.setText(text);
