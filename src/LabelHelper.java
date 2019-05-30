@@ -42,9 +42,9 @@ public class LabelHelper extends Label {
                 }),
                 new KeyFrame(Duration.millis(350))
         );
+        setTimeline(timeline);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
     }
 }
 

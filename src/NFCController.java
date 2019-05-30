@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
-public class NFCController {
+public class NFCController extends SerialController {
 
     public ArrayList<Character> chars;
     private String fil;
@@ -149,12 +149,9 @@ public class NFCController {
             // Give Object to Main and start Scale Controller
             Main.startScaleController(retoure);
 
-            // Update FX Elements through this code snippet
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    Main.displayManager.setLabelText(fil, 0);
-                }
-            });
+            // Update FX Elements through superclass
+            setLabelText(fil, 0);
+
 
         } catch (Exception e) {
             // Show error when data cannot be extracted from NFC

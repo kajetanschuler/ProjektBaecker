@@ -64,7 +64,7 @@ public class DisplayManager {
         anzahl = new LabelHelper("Hier kommt Anzahl rein");
 
         // Set Animation for status Label
-        //status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
+        status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
         //animateLabelText(gewicht, "Test", "Test . . .");
 
         // Prepare and Show Stage
