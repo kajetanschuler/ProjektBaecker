@@ -65,7 +65,7 @@ public class DisplayManager {
 
         // Set Animation for status Label
         status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
-        //animateLabelText(gewicht, "Test", "Test . . .");
+        gewicht.animateLabelText("Test", "Test . . .");
 
         // Prepare and Show Stage
         Scene scene = new Scene(gridPane);
@@ -85,8 +85,6 @@ public class DisplayManager {
 
         liveData.add(gewicht, 0, 1);
         liveData.add(anzahl, 0, 2);
-
-        status.pauseTimeline();
 
     }
 
