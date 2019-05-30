@@ -12,9 +12,9 @@ import javafx.util.Duration;
 public class DisplayManager {
     private final GridPane gridPane = new GridPane();
     private Stage primaryStage;
-    private Label status;
-    private Label gewicht;
-    private Label anzahl;
+    private LabelHelper status;
+    private LabelHelper gewicht;
+    private LabelHelper anzahl;
     private Timeline timeline;
     private ColumnConstraints cC;
 
@@ -59,12 +59,13 @@ public class DisplayManager {
         timeline.setCycleCount(Timeline.INDEFINITE);*/
 
         // Set labels
-        status   = new Label("Warte auf NFC-Tag");
-        gewicht = new Label("Hier kommt später das Gewicht rein");
-        anzahl = new Label("Hier kommt Anzahl rein");
+        status = new LabelHelper("Warte auf NFC-Tag");
+        gewicht = new LabelHelper("Test");
+        anzahl = new LabelHelper("Hier kommt Anzahl rein");
 
         // Set Animation for status Label
-        animateLabelText(status, "Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
+        //status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
+        //animateLabelText(gewicht, "Test", "Test . . .");
 
         // Prepare and Show Stage
         Scene scene = new Scene(gridPane);
@@ -80,12 +81,12 @@ public class DisplayManager {
         liveData.getColumnConstraints().addAll(cC);
         liveData.getChildren().addAll(status);
 
-        //timeline.play();
         gridPane.add(liveData, 1, 0);
-
 
         liveData.add(gewicht, 0, 1);
         liveData.add(anzahl, 0, 2);
+
+        status.pauseTimeline();
 
     }
 
@@ -98,7 +99,7 @@ public class DisplayManager {
         switch (labelId) {
             case 0:
                 status.setText(text);
-                pauseTimeline();
+                status.pauseTimeline();
                 // Todo: Timer für Reset des Labels
                 break;
 
@@ -116,33 +117,6 @@ public class DisplayManager {
     }
 
     // Todo: Add function that adds GridPane live Data for reset and initialization
-
-    /**
-     *
-     */
-    private void pauseTimeline() {
-        timeline.pause();
-    }
-
-    private void animateLabelText(Label label, String initialText, String endText) {
-        // create animation for NFC Label
-        timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new EventHandler() {
-                    @Override public void handle(Event event) {
-                        String statusText = label.getText();
-                        label.setText(
-                                (endText.equals(statusText))
-                                        ? initialText
-                                        : statusText + " ."
-                        );
-                    }
-                }),
-                new KeyFrame(Duration.millis(350))
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-
-    }
 
 
 }
