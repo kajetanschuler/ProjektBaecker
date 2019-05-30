@@ -40,9 +40,9 @@ public class DisplayManager {
         //cC.setHalignment(HPos.CENTER);
         gridPane.getColumnConstraints().addAll(cC, cC, cC);
 
-        status   = new Label("Warte auf NFC-Tag");
 
-        // create animation for NFC Label
+
+/*        // create animation for NFC Label
         timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new EventHandler() {
                     @Override public void handle(Event event) {
@@ -56,11 +56,15 @@ public class DisplayManager {
                 }),
                 new KeyFrame(Duration.millis(350))
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setCycleCount(Timeline.INDEFINITE);*/
 
         // Set labels
+        status   = new Label("Warte auf NFC-Tag");
         gewicht = new Label("Hier kommt später das Gewicht rein");
         anzahl = new Label("Hier kommt Anzahl rein");
+
+        // Set Animation for status Label
+        animateLabelText(status, "Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
 
         // Prepare and Show Stage
         Scene scene = new Scene(gridPane);
@@ -76,7 +80,7 @@ public class DisplayManager {
         liveData.getColumnConstraints().addAll(cC);
         liveData.getChildren().addAll(status);
 
-        timeline.play();
+        //timeline.play();
         gridPane.add(liveData, 1, 0);
 
 
@@ -118,6 +122,26 @@ public class DisplayManager {
      */
     private void pauseTimeline() {
         timeline.pause();
+    }
+
+    private void animateLabelText(Label label, String initialText, String endText) {
+        // create animation for NFC Label
+        timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new EventHandler() {
+                    @Override public void handle(Event event) {
+                        String statusText = label.getText();
+                        label.setText(
+                                (endText.equals(statusText))
+                                        ? initialText
+                                        : statusText + " ."
+                        );
+                    }
+                }),
+                new KeyFrame(Duration.millis(350))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
     }
 
 

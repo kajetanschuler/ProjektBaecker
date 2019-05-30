@@ -1,7 +1,5 @@
-
 import java.util.ArrayList;
 
-// Todo: Umschreiben für Retoure
 public class Init {
     public static ArrayList<Artikel> artikelData;
 

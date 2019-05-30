@@ -136,25 +136,34 @@ public class NFCController {
         int art1 = parts[1].indexOf(":") + 1;
         int art2 = parts[1].indexOf(".");
 
-        // Todo: Exception Handling
         // Create String/Int for Label and Retoure Object
-        int filiale = Integer.parseInt(parts[0].substring(fil1, fil2));
-        String artikel = parts[1].substring(art1, art2);
+        try {
+            int filiale = Integer.parseInt(parts[0].substring(fil1, fil2));
+            String artikel = parts[1].substring(art1, art2);
 
-        fil = "Filiale: " + filiale + " - Artikel: " + artikel;
+            fil = "Filiale: " + filiale + " - Artikel: " + artikel;
 
-        // Create Retoure Object from extracted data
-        Retoure retoure = new Retoure(filiale, artikel);
+            // Create Retoure Object from extracted data
+            Retoure retoure = new Retoure(filiale, artikel);
 
-        // Give Object to Main and start Scale Controller
-        Main.startScaleController(retoure);
+            // Give Object to Main and start Scale Controller
+            Main.startScaleController(retoure);
 
-        // Update FX Elements through this code snippet
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Main.displayManager.setLabelText(fil, 0);
-            }
-        });
+            // Update FX Elements through this code snippet
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Main.displayManager.setLabelText(fil, 0);
+                }
+            });
+
+        } catch (Exception e) {
+            // Show error when data cannot be extracted from NFC
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Main.displayManager.setLabelText("Could not retrieve data - please try again!", 0);
+                }
+            });
+        }
 
         // delete contents of ArrayList for next Serial Event
         chars.clear();

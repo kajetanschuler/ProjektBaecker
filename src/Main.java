@@ -12,7 +12,6 @@ public class Main extends Application {
     public static DisplayManager displayManager;
     public static Init artikelData;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         displayManager = new DisplayManager(primaryStage);
@@ -24,14 +23,12 @@ public class Main extends Application {
 
         // Start NFC Detection in new Thread
 
-        Thread thread = new Thread(){
-            public void run(){
+        Thread nfcThread = new Thread() {
+            public void run() {
                 NFCController nfcController = new NFCController();
             }
         };
-
-        // Todo: Automatischer Start von StartNFC bei Constructuor Aufruf
-        thread.start();
+        nfcThread.start();
 
     }
 
@@ -39,8 +36,15 @@ public class Main extends Application {
         launch(args);
     }
 
+    // Start scale Controller from other classes to get weight from scale
     public static void startScaleController(Retoure retoure) {
-        ScaleController scaleController = new ScaleController(retoure);
+        Thread scaleThread = new Thread() {
+            public void run() {
+                ScaleController scaleController = new ScaleController(retoure);
+
+            }
+        };
+        scaleThread.start();
     }
 
     public static void startCalculator() {
