@@ -9,10 +9,9 @@ public class Init {
     }
 
     private void initializeArticleData() {
-        artikelData.add(new Artikel("Bretzel", 87.5));
+        artikelData.add(new Artikel("Brezel", 87.5));
         artikelData.add(new Artikel("Streusel", 135.3));
         artikelData.add(new Artikel("Donut", 38.4));
-
     }
 
     public ArrayList<Artikel> getArtikelData() {

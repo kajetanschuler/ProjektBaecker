@@ -16,7 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         displayManager = new DisplayManager(primaryStage);
         artikelData = new Init();
-        startCalculator();
 
         // Testing: Which comPorts exist?
         SerialPort comPort[] = SerialPort.getCommPorts();
@@ -41,14 +40,13 @@ public class Main extends Application {
         Thread scaleThread = new Thread() {
             public void run() {
                 ScaleController scaleController = new ScaleController(retoure);
-
             }
         };
         scaleThread.start();
     }
 
-    public static void startCalculator() {
-        Calculator calculator = new Calculator(new Retoure(12, "Bretzel"));
+    public static void startCalculator(Retoure retoure) {
+        Calculator calculator = new Calculator(retoure);
         calculator.calculateAmount();
     }
 

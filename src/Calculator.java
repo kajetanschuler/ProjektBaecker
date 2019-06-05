@@ -7,19 +7,34 @@ public class Calculator {
         this.retoure = retoure;
     }
 
+    /**
+     *
+     */
+
     public void calculateAmount() {
         String artikel;
+        double dgewicht;
+        double retouregewicht;
+
         for (int i = 0; i < Main.artikelData.getArtikelData().size(); i++) {
             artikel = Main.artikelData.getArtikelData().get(i).getArtikel();
-            System.out.println(artikel);
-            if (artikel.equals(retoure.getArtikel())) {
+            dgewicht = Main.artikelData.getArtikelData().get(i).getdGewicht();
 
+            System.out.println(artikel);
+            System.out.println(dgewicht);
+
+            if (artikel.equals(retoure.getArtikel())) {
+                 retouregewicht = retoure.getGewicht();
+                System.out.println(retouregewicht);
+                double anzahl = Math.round(retouregewicht / dgewicht);
+                int anzahlgerundet = (int) Math.round(anzahl);
+
+                setLabelText(Integer.toString(anzahlgerundet) + " " + artikel,2);
             }
         }
-        double anzahl = (retoure.getGewicht() / retoure.getDurchschnittsgewicht());
-
-
     }
+
+
 
     private void setLabelText(String text, int labelId) {
 
