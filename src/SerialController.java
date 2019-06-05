@@ -10,4 +10,13 @@ public class SerialController {
             }
         });
     }
+
+    public void animateLabel(String initialText, String endText, int labelId) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Main.displayManager.animateLabel(initialText, endText, labelId);
+            }
+        });
+    }
 }

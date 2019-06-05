@@ -11,7 +11,7 @@ public class ScaleController extends SerialController {
 
     public ScaleController(Retoure retoure) {
         this.retoure = retoure;
-        setLabelText("Warte auf Gewicht...", 1);
+        animateLabel("Warte auf Gewicht", "Warte auf Gewicht . . .", 1);
     }
 
     /**

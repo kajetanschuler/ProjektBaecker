@@ -60,19 +60,18 @@ public class DisplayManager {
 
         // Set labels
         status = new LabelHelper("Warte auf NFC-Tag");
-        gewicht = new LabelHelper("Test");
+        gewicht = new LabelHelper("");
         anzahl = new LabelHelper("Hier kommt Anzahl rein");
 
         // Set Animation for status Label
         status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
-        gewicht.animateLabelText("Test", "Test . . .");
 
         // Prepare and Show Stage
         Scene scene = new Scene(gridPane);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
         primaryStage.setTitle("Projekt Bäcker");
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
 
         // Todo: Add more labels
@@ -112,6 +111,23 @@ public class DisplayManager {
 
         }
 
+    }
+
+    public void animateLabel (String initialText, String endText, int labelId) {
+        switch(labelId) {
+            case 0:
+                status.animateLabelText(initialText, endText);
+                break;
+
+            case 1:
+                gewicht.animateLabelText(initialText, endText);
+                break;
+
+            case 2:
+                anzahl.animateLabelText(initialText, endText);
+                break;
+
+        }
     }
 
     // Todo: Add function that adds GridPane live Data for reset and initialization
