@@ -1,11 +1,12 @@
 import javafx.application.Platform;
 
-public class Calculator {
+public class Calculator extends SerialController {
     private Retoure retoure;
 
     public Calculator(Retoure retoure) {
         this.retoure = retoure;
     }
+
 
     /**
      *
@@ -24,7 +25,7 @@ public class Calculator {
             System.out.println(dgewicht);
 
             if (artikel.equals(retoure.getArtikel())) {
-                 retouregewicht = retoure.getGewicht();
+                retouregewicht = retoure.getGewicht();
                 System.out.println(retouregewicht);
                 double anzahl = Math.round(retouregewicht / dgewicht);
                 int anzahlgerundet = (int) Math.round(anzahl);
@@ -34,17 +35,6 @@ public class Calculator {
         }
     }
 
-
-
-    private void setLabelText(String text, int labelId) {
-
-        // Update FX Elements through this code snippet
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Main.displayManager.setLabelText(text, labelId);
-            }
-        });
-    }
 }
 
 

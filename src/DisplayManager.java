@@ -61,7 +61,7 @@ public class DisplayManager {
         // Set labels
         status = new LabelHelper("Warte auf NFC-Tag");
         gewicht = new LabelHelper("");
-        anzahl = new LabelHelper("Hier kommt Anzahl rein");
+        anzahl = new LabelHelper("");
 
         // Set Animation for status Label
         status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
@@ -102,6 +102,7 @@ public class DisplayManager {
 
             case 1:
                 gewicht.setText(text);
+                gewicht.pauseTimeline();
                 break;
                 // Todo: Set Animation with regard to given Text
 

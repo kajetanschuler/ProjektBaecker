@@ -2,7 +2,6 @@ public class Retoure {
     private int filiale;
     private String artikel;
     private double gewicht;
-    private double durchschnittsgewicht;
 
     public Retoure(int filiale, String artikel, double gewicht) {
         this.filiale = filiale;
@@ -27,10 +26,6 @@ public class Retoure {
         return gewicht;
     }
 
-    public double getDurchschnittsgewicht() {
-        return durchschnittsgewicht;
-    }
-
     public void setFiliale(int filiale) {
         this.filiale = filiale;
     }
@@ -43,7 +38,4 @@ public class Retoure {
         this.gewicht = gewicht;
     }
 
-    public void setDurchschnittsgewicht(double durchschnittsgewicht) {
-        this.durchschnittsgewicht = durchschnittsgewicht;
-    }
 }

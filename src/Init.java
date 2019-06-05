@@ -9,7 +9,7 @@ public class Init {
     }
 
     private void initializeArticleData() {
-        artikelData.add(new Artikel("Brezel", 87.5));
+        artikelData.add(new Artikel("Brezel", 135.65));
         artikelData.add(new Artikel("Streusel", 135.3));
         artikelData.add(new Artikel("Donut", 38.4));
     }

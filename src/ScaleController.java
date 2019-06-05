@@ -3,6 +3,7 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPortPacketListener;
 import javafx.application.Platform;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class ScaleController extends SerialController {
@@ -12,15 +13,17 @@ public class ScaleController extends SerialController {
     public ScaleController(Retoure retoure) {
         this.retoure = retoure;
         animateLabel("Warte auf Gewicht", "Warte auf Gewicht . . .", 1);
+        startScale();
     }
 
     /**
      *
      */
-    public void startNFC() {
+    public void startScale() {
         // Todo: Ports auslesen bei Julia --> String möglich?
         SerialPort comPort = SerialPort.getCommPorts()[7];
-        comPort.setBaudRate(115200);
+        comPort.setBaudRate(9600);
+        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
         comPort.openPort();
         chars = new ArrayList<>();
         comPort.addDataListener(new SerialPortPacketListener() {
@@ -31,7 +34,7 @@ public class ScaleController extends SerialController {
 
             @Override
             public int getPacketSize() {
-                return 134;
+                return 20;
             }
 
             @Override
@@ -41,11 +44,34 @@ public class ScaleController extends SerialController {
                 for (int i = 0; i < newData.length; ++i) {
                     System.out.print((char) newData[i]);
                     chars.add((char) newData[i]);
+
                 }
+
+                transformString(chars);
 
                 System.out.println("\n");
             }
         });
+
+    }
+
+    private void transformString(ArrayList<Character> data) {
+        // Build String from Array List
+        StringBuilder stringBuilder = new StringBuilder(data.size());
+        for (char c : data) {
+            stringBuilder.append(c);
+
+        }
+        String gewicht = stringBuilder.toString();
+
+        gewicht = gewicht.replaceAll("[^\\d.]", "");
+        double wGewicht = Double.parseDouble(gewicht);
+
+        setLabelText("Gewicht: " + gewicht + "g", 1);
+        retoure.setGewicht(wGewicht);
+        Main.startCalculator(retoure);
+
+        chars.clear();
     }
 
 
