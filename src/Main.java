@@ -29,6 +29,9 @@ public class Main extends Application {
         displayManager = new DisplayManager(primaryStage);
         artikelData = new Init();
 
+        //Start Calculator without ScaleController for Testing
+        //startCalculator();
+
         // Testing: Which comPorts exist?
         //SerialPort comPort[] = SerialPort.getCommPorts();
 
@@ -57,10 +60,18 @@ public class Main extends Application {
         scaleThread.start();
     }
 
+
     public static void startCalculator(Retoure retoure) {
         Calculator calculator = new Calculator(retoure);
         calculator.calculateAmount();
     }
+
+
+    // Function for Testing without ScaleController
+//    public static void startCalculator() {
+//        Calculator calculator = new Calculator(new Retoure(12,"Brezel",1000));
+//        calculator.calculateAmount();
+//   }
 
 
 
