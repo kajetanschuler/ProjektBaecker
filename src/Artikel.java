@@ -8,6 +8,12 @@ public class Artikel {
         this.dGewicht = dGewicht;
     }
 
+    public Artikel(String artikel, double dGewicht, double sDeviation) {
+        this.artikel = artikel;
+        this.dGewicht = dGewicht;
+        this.sDeviation = sDeviation;
+    }
+
     public String getArtikel() {
         return artikel;
     }

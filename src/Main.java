@@ -67,7 +67,7 @@ public class Main extends Application {
     }
 
 
-    // Function for Testing without ScaleController
+     //Function for Testing without ScaleController
 //    public static void startCalculator() {
 //        Calculator calculator = new Calculator(new Retoure(12,"Brezel",1000));
 //        calculator.calculateAmount();
