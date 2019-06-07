@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    final String MAC_NFC_PORT = "tty.usbserial-14120";
+    final String MAC_NFC_PORT = "tty.usbserial-141";
     final String MAC_SCALE_PORT = "tty.usbserial-A907EH5J";
     final String WIN_NFC_PORT = "CH340";
     final String WIN_SCALE_PORT = "FT232R";
@@ -76,7 +76,7 @@ public class Main extends Application {
 
         else if (OS.contains("mac")) {
             for (int i = 0; i < comPort.length; i++) {
-                if (comPort[i].getSystemPortName().equals(MAC_NFC_PORT)) {
+                if (comPort[i].getSystemPortName().contains(MAC_NFC_PORT)) {
                     return i;
                 }
             }
