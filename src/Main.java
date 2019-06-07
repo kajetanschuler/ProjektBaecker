@@ -11,8 +11,8 @@ public class Main extends Application {
 
     final String MAC_NFC_PORT = "tty.usbserial-14120";
     final String MAC_SCALE_PORT = "tty.usbserial-A907EH5J";
-    final String WIN_NFC_PORT = "usb-serial ch340";
-    final String WIN_SCALE_PORT = "ft232r";
+    final String WIN_NFC_PORT = "CH340";
+    final String WIN_SCALE_PORT = "FT232R";
 
     public static DisplayManager displayManager;
     public static Init artikelData;
