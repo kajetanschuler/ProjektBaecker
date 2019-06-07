@@ -30,6 +30,7 @@ public class LabelHelper extends Label {
     public void animateLabelText(String initialText, String endText) {
         // create animation for NFC Label
         super.setText(initialText);
+        pauseTimeline();
         timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new EventHandler() {
                     @Override public void handle(Event event) {

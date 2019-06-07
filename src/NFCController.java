@@ -9,10 +9,11 @@ public class NFCController extends SerialController {
 
     public ArrayList<Character> chars;
     private String fil;
+    private int sPort;
 
-    public NFCController() {
+    public NFCController(int sPort) {
+        this.sPort = sPort;
         startNFC();
-
     }
 
     /**
@@ -20,7 +21,7 @@ public class NFCController extends SerialController {
      */
     public void startNFC() {
         // Todo: Ports auslesen bei Julia --> String möglich?
-        SerialPort comPort = SerialPort.getCommPorts()[9];
+        SerialPort comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(115200);
         comPort.openPort();
         chars = new ArrayList<>();

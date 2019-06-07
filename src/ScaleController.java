@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public class ScaleController extends SerialController {
     private Retoure retoure;
     private ArrayList<Character> chars;
+    private int sPort;
 
-    public ScaleController(Retoure retoure) {
+    public ScaleController(Retoure retoure, int sPort) {
         this.retoure = retoure;
+        this.sPort = sPort;
         animateLabel("Warte auf Gewicht", "Warte auf Gewicht . . .", 1);
         startScale();
     }
@@ -21,7 +23,7 @@ public class ScaleController extends SerialController {
      */
     public void startScale() {
         // Todo: Ports auslesen bei Julia --> String möglich?
-        SerialPort comPort = SerialPort.getCommPorts()[7];
+        SerialPort comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(9600);
         comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
         comPort.openPort();
