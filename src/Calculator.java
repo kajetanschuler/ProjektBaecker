@@ -26,9 +26,11 @@ public class Calculator extends SerialController {
 
                 if (artikel.equals(retoure.getArtikel())) {
                     retoureGewicht = retoure.getGewicht();
-                    double anzahl = Math.round(retoureGewicht / dGewicht);
+                    double anzahl = retoureGewicht / dGewicht;
+                    //7.3 -> Amount: 7; 7.6 -> Amount: 8
                     int anzahlgerundet = (int) Math.round(anzahl);
 
+                    //Todo: Ggf. Anzeigetext ändern
                     setLabelText(Integer.toString(anzahlgerundet) + " " + artikel,2);
                 }
             }
