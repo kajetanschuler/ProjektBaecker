@@ -1,10 +1,16 @@
 
 import com.fazecast.jSerialComm.SerialPort;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Main extends Application {
@@ -18,6 +24,9 @@ public class Main extends Application {
     public static Init artikelData;
     public static String OS = System.getProperty("os.name").toLowerCase();
     public static SerialPort comPort[] = SerialPort.getCommPorts();
+
+    public static Timeline timelineNFC;
+    public static Timeline timelineReset;
 
     public static int scalePort;
     public int NFCPort;
@@ -52,18 +61,42 @@ public class Main extends Application {
 
     // Start scale Controller from other classes to get weight from scale
     public static void startScaleController(Retoure retoure) {
+/*        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                LabelHelper status = displayManager.getStatus();
+                status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
+            }
+        };
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 5000);
+            }
+        });*/
+        timelineNFC = new Timeline(new KeyFrame(Duration.millis(20000),
+                ae -> displayManager.resetNFCLabel()));
+        timelineNFC.play();
+
+
         Thread scaleThread = new Thread() {
             public void run() {
                 ScaleController scaleController = new ScaleController(retoure, scalePort);
             }
         };
         scaleThread.start();
+
+
     }
 
 
     public static void startCalculator(Retoure retoure) {
+        timelineNFC.pause();
         Calculator calculator = new Calculator(retoure);
         calculator.calculateAmount();
+
     }
 
 
@@ -132,6 +165,10 @@ public class Main extends Application {
 
         return -1;
     }
+
+
+
+
 
 
 }

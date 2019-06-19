@@ -73,6 +73,10 @@ public class ScaleController extends SerialController {
         retoure.setGewicht(wGewicht);
         Main.startCalculator(retoure);
 
+        if (wGewicht == 0.0) {
+            Main.displayManager.labelReset();
+        }
+
         chars.clear();
     }
 

@@ -1,5 +1,6 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,13 +11,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DisplayManager {
-    private final GridPane gridPane = new GridPane();
+    private GridPane gridPane;
     private Stage primaryStage;
     private LabelHelper status;
     private LabelHelper gewicht;
     private LabelHelper anzahl;
     private Timeline timeline;
     private ColumnConstraints cC;
+    private Scene scene;
 
     // Constructor for the display Manager - sets up windows
     public DisplayManager(Stage primaryStage) {
@@ -25,14 +27,25 @@ public class DisplayManager {
 
     }
 
+    public void clearPane() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                initializeWindows();
+            }
+        });
+    }
+
     /**
      *
      */
     // Make GridLayout, Labels and Constraints
-    private void initializeWindows () {
+    public void initializeWindows () {
 
-        // initialize GridPane
+        // initialize GridPane and Scene
+        gridPane = new GridPane();
         gridPane.setGridLinesVisible(false);
+        scene = new Scene(gridPane);
 
         // Coloumn Constraints for correct width
         cC = new ColumnConstraints();
@@ -67,18 +80,17 @@ public class DisplayManager {
         status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
 
         // Prepare and Show Stage
-        Scene scene = new Scene(gridPane);
+        //Scene scene = new Scene(gridPane);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(Main.class.getResource("/style.css").toExternalForm());
         primaryStage.setTitle("Projekt Bäcker");
         //primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        // Todo: Add more labels
         GridPane liveData = new GridPane();
         cC.setPercentWidth(100);
         liveData.getColumnConstraints().addAll(cC);
-        liveData.getChildren().addAll(status);
+        liveData.getChildren().add(status);
 
         gridPane.add(liveData, 1, 0);
 
@@ -133,5 +145,25 @@ public class DisplayManager {
 
     // Todo: Add function that adds GridPane live Data for reset and initialization
 
+    public void resetNFCLabel() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gewicht.setText("");
+                gewicht.pauseTimeline();
+                anzahl.setText("");
+                status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
+            }
+        });
 
+
+    }
+
+    public void labelReset() {
+        resetNFCLabel();
+    }
+
+    public LabelHelper getStatus() {
+        return status;
+    }
 }

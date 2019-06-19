@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjektBaecker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjektBaecker_jar</output-path>
+    <root id="archive" name="ProjektBaecker.jar">
+      <element id="module-output" name="ProjektBaecker" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libraries/jSerialComm-2.5.1.jar" path-in-jar="/" />
+      <element id="library" level="project" name="lib" />
+      <element id="file-copy" path="$PROJECT_DIR$/libraries/jSerialComm-2.5.1.jar" />
+    </root>
+  </artifact>
+</component>
