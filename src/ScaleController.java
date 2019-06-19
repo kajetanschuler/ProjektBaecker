@@ -22,7 +22,6 @@ public class ScaleController extends SerialController {
      *
      */
     public void startScale() {
-        // Todo: Ports auslesen bei Julia --> String möglich?
         SerialPort comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(9600);
         comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);

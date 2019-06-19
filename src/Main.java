@@ -77,7 +77,7 @@ public class Main extends Application {
             }
         });*/
         timelineNFC = new Timeline(new KeyFrame(Duration.millis(20000),
-                ae -> displayManager.resetNFCLabel()));
+                ae -> displayManager.labelReset()));
         timelineNFC.play();
 
 

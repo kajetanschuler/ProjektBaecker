@@ -27,18 +27,6 @@ public class DisplayManager {
 
     }
 
-    public void clearPane() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                initializeWindows();
-            }
-        });
-    }
-
-    /**
-     *
-     */
     // Make GridLayout, Labels and Constraints
     public void initializeWindows () {
 
@@ -109,14 +97,12 @@ public class DisplayManager {
             case 0:
                 status.setText(text);
                 status.pauseTimeline();
-                // Todo: Timer für Reset des Labels
                 break;
 
             case 1:
                 gewicht.setText(text);
                 gewicht.pauseTimeline();
                 break;
-                // Todo: Set Animation with regard to given Text
 
             case 2:
                 anzahl.setText(text);
@@ -145,7 +131,7 @@ public class DisplayManager {
 
     // Todo: Add function that adds GridPane live Data for reset and initialization
 
-    public void resetNFCLabel() {
+    public void labelReset() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -157,10 +143,6 @@ public class DisplayManager {
         });
 
 
-    }
-
-    public void labelReset() {
-        resetNFCLabel();
     }
 
     public LabelHelper getStatus() {

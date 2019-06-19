@@ -20,7 +20,6 @@ public class NFCController extends SerialController {
      *
      */
     public void startNFC() {
-        // Todo: Ports auslesen bei Julia --> String möglich?
         SerialPort comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(115200);
         comPort.openPort();
@@ -169,4 +168,3 @@ public class NFCController extends SerialController {
     }
 }
 
-// Todo: Timer um Seriellen Port zu resetten
