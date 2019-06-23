@@ -50,7 +50,7 @@ public class Calculator extends SerialController {
     }
 
     /**
-     * Function for calculating the 95% confidence interval
+     * Function for calculating the confidence interval with 95% confidence level
      */
 
     public void calculateConfidenceInterval (int anzahl, double dGewicht, double sDeviation){
@@ -65,13 +65,10 @@ public class Calculator extends SerialController {
         high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
-        System.out.println("Der Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
+        System.out.println("Der 95% Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
 
-        //TODO: Abstimmung Kajetan -> Neues Label für Konfidenzintervall
+        //TODO: New Label to show the result?
     }
-
-
-
 
 }
 
