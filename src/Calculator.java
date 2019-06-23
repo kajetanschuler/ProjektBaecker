@@ -50,23 +50,24 @@ public class Calculator extends SerialController {
     }
 
     /**
-     * Function for calculating the confidence interval
+     * Function for calculating the 95% confidence interval
      */
 
     public void calculateConfidenceInterval (int anzahl, double dGewicht, double sDeviation){
 
         double low;
         double high;
+        final double confidencecoefficient = 1.96; //95% confidence intervall -> 1.96 confidence coefficient
 
-        low = (anzahl * dGewicht) - (1.96 * Math.sqrt(anzahl) * sDeviation);
+        low = (anzahl * dGewicht) - (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double lowgerundet = Math.round(low * 100.0) / 100.0;
 
-        high = (anzahl * dGewicht) + (1.96 * Math.sqrt(anzahl) * sDeviation);
+        high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
         System.out.println("Der Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
 
-        //TODO: Dynamische Änderung der Quantilberechnung / Bestimmung Z Wert
+        //TODO: Abstimmung Kajetan -> Neues Label für Konfidenzintervall
     }
 
 
