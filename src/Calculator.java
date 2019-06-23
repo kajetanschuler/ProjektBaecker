@@ -59,15 +59,20 @@ public class Calculator extends SerialController {
         double high;
         final double confidencecoefficient = 1.96; //95% confidence intervall -> 1.96 confidence coefficient
 
+        //Calculating the lower bound
         low = (anzahl * dGewicht) - (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double lowgerundet = Math.round(low * 100.0) / 100.0;
 
+        //Calculating the upper bound
         high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
-        System.out.println("Der 95% Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
+        //TODO: SetLabelText!
+        System.out.println("Das 95% Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
 
         //TODO: New Label to show the result?
+
+        //TODO: Dynamische Berechnung des Konfidenzkoeffizienten?
     }
 
 }
