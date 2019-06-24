@@ -51,6 +51,7 @@ public class Calculator extends SerialController {
 
     /**
      * Function for calculating the confidence interval with 95% confidence level
+     *
      */
 
     public void calculateConfidenceInterval (int anzahl, double dGewicht, double sDeviation){

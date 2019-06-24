@@ -1,9 +1,11 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -19,6 +21,8 @@ public class DisplayManager {
     private Timeline timeline;
     private ColumnConstraints cC;
     private Scene scene;
+    private Button closeButton;
+
 
     // Constructor for the display Manager - sets up windows
     public DisplayManager(Stage primaryStage) {
@@ -64,6 +68,9 @@ public class DisplayManager {
         gewicht = new LabelHelper("");
         anzahl = new LabelHelper("");
 
+        // Set Button
+        closeButton = new Button("Beenden");
+
         // Set Animation for status Label
         status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
 
@@ -81,9 +88,17 @@ public class DisplayManager {
         liveData.getChildren().add(status);
 
         gridPane.add(liveData, 1, 0);
+        gridPane.add(closeButton, 2,0);
 
         liveData.add(gewicht, 0, 1);
         liveData.add(anzahl, 0, 2);
+
+
+        closeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
     }
 
@@ -143,6 +158,11 @@ public class DisplayManager {
         });
 
 
+    }
+
+    public void handleCloseButtonAction(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 
     public LabelHelper getStatus() {
