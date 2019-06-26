@@ -1,5 +1,7 @@
 
 import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+import com.fazecast.jSerialComm.SerialPortPacketListener;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -19,6 +21,10 @@ public class Main extends Application {
     final String MAC_SCALE_PORT = "tty.usbserial-A907EH5J";
     final String WIN_NFC_PORT = "CH340";
     final String WIN_SCALE_PORT = "FT232R";
+    final String LIN_NFC_PORT = "ch341";
+    final String LIN_SCALE_PORT = "FT232R";
+
+    ArrayList<Character> chars = new ArrayList<>();
 
     public static DisplayManager displayManager;
     public static Init artikelData;
@@ -33,8 +39,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println(OS);
+        for (int i = 0; i < comPort.length; i++) {
+            String name = comPort[i].getSystemPortName();
+            String name2 = comPort[i].getDescriptivePortName();
+            String name3 = comPort[i].getPortDescription();
+            System.out.println("--- " + i + ": " + name + ", " + name2 + ", " + name3 + " ---");
+        }
         NFCPort = getNFCPort();
         scalePort = getScalePort();
+        System.out.println("Scale port:" + scalePort);
+
         displayManager = new DisplayManager(primaryStage);
         artikelData = new Init();
 
@@ -46,7 +61,9 @@ public class Main extends Application {
 
         // Start NFC Detection in new Thread
 
-        Thread nfcThread = new Thread() {
+        //System.exit(0);
+
+       Thread nfcThread = new Thread() {
             public void run() {
                 NFCController nfcController = new NFCController(NFCPort);
             }
@@ -127,6 +144,14 @@ public class Main extends Application {
             }
         }
 
+        else if (OS.contains("linux")) {
+            for (int i = 0; i < comPort.length; i++) {
+                if (comPort[i].getDescriptivePortName().contains(LIN_NFC_PORT)) {
+                    return i;
+                }
+            }
+        }
+
         else {
 
             return -1;
@@ -153,23 +178,28 @@ public class Main extends Application {
                     return i;
                 }
 
+            }
+        }
 
-
+        else if (OS.contains("linux")) {
+            System.out.println("Checking for: " + LIN_SCALE_PORT);
+            for (int i = 0; i < comPort.length; i++) {
+                String description = comPort[i].getPortDescription();
+                System.out.println("Port Description:" + description);
+                if (comPort[i].getPortDescription().contains(LIN_SCALE_PORT)) {
+                    return i;
+                }
             }
         }
 
         else {
 
+            System.out.println("What happened?");
             return -1;
 
         }
 
         return -1;
     }
-
-
-
-
-
 
 }

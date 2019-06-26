@@ -64,6 +64,7 @@ public class ScaleController extends SerialController {
 
         }
         String gewicht = stringBuilder.toString();
+        System.out.println(gewicht);
 
         gewicht = gewicht.replaceAll("[^\\d.]", "");
         double wGewicht = Double.parseDouble(gewicht);
