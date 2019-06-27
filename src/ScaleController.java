@@ -71,7 +71,7 @@ public class ScaleController extends SerialController {
 
         setLabelText("Gewicht: " + gewicht + "g", 1);
         retoure.setGewicht(wGewicht);
-        Main.startCalculator(retoure);
+        //Main.startCalculator(retoure);
 
         if (wGewicht == 0.0) {
             Main.displayManager.labelReset();

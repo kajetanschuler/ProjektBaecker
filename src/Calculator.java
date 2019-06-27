@@ -68,12 +68,8 @@ public class Calculator extends SerialController {
         high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
-        //TODO: SetLabelText!
-        System.out.println("Das 95% Konfidenzintervall liegt zwischen " + lowgerundet + " und " + highgerundet + ".");
+        setLabelText("Konfidenzintervall zwischen " + lowgerundet + " und " + highgerundet,3);
 
-        //TODO: New Label to show the result?
-
-        //TODO: Dynamische Berechnung des Konfidenzkoeffizienten?
     }
 
 }
