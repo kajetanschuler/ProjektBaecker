@@ -54,7 +54,7 @@ public class Main extends Application {
         artikelData = new Init();
 
         //Start Calculator without ScaleController for Testing
-        startCalculator();
+        //startCalculator();
 
         // Testing: Which comPorts exist?
         //SerialPort comPort[] = SerialPort.getCommPorts();
@@ -108,21 +108,21 @@ public class Main extends Application {
 
     }
 
-//
-//    public static void startCalculator(Retoure retoure) {
-//        timelineNFC.pause();
-//        Calculator calculator = new Calculator(retoure);
-//        calculator.calculateAmount();
-//
-//    }
+
+    public static void startCalculator(Retoure retoure) {
+        timelineNFC.pause();
+        Calculator calculator = new Calculator(retoure);
+        calculator.calculateAmount();
+
+    }
 
 
 
     //Function for Testing without ScaleController
-    public static void startCalculator() {
-        Calculator calculator = new Calculator(new Retoure(12,"Brezel",5017));
-        calculator.calculateAmount();
-   }
+//    public static void startCalculator() {
+//        Calculator calculator = new Calculator(new Retoure(12,"Brezel",5017));
+//        calculator.calculateAmount();
+//   }
 
 
 
