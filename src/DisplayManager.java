@@ -232,6 +232,7 @@ public class DisplayManager {
                 gewicht.setText("");
                 gewicht.pauseTimeline();
                 anzahl.setText("");
+                intervall.setText("");
                 status.animateLabelText("Warte auf NFC-Tag", "Warte auf NFC-Tag . . .");
             }
         });

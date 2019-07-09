@@ -10,6 +10,7 @@ public class ScaleController extends SerialController {
     private Retoure retoure;
     private ArrayList<Character> chars;
     private int sPort;
+    private SerialPort comPort;
 
     public ScaleController(Retoure retoure, int sPort) {
         this.retoure = retoure;
@@ -22,7 +23,7 @@ public class ScaleController extends SerialController {
      *
      */
     public void startScale() {
-        SerialPort comPort = SerialPort.getCommPorts()[sPort];
+        comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(9600);
         comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
         comPort.openPort();
@@ -51,6 +52,7 @@ public class ScaleController extends SerialController {
                 transformString(chars);
 
                 System.out.println("\n");
+
             }
         });
 
