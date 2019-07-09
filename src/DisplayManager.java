@@ -144,11 +144,9 @@ public class DisplayManager {
         cC1.setPercentWidth(100);
         liveData.getColumnConstraints().addAll(cC1);
         liveData.getChildren().add(status);
-        //GridPane.setHalignment(status, HPos.CENTER); Zentrierung nicht passen aufgrund Animation
 
         gridPane2.add(liveData, 1, 0);
         liveData.add(gewicht, 0, 1);
-        GridPane.setHalignment(gewicht, HPos.CENTER);
         gridPane2.add(closeButton,2,0);
         GridPane.setHalignment(closeButton, HPos.RIGHT);
 
@@ -156,11 +154,8 @@ public class DisplayManager {
         amountData.getColumnConstraints().addAll(cC1);
 
         gridPane3.add(amountData, 1,0);
-        amountData.add(anzahl, 0, 1);
-        GridPane.setHalignment(anzahl, HPos.CENTER);
+        liveData.add(anzahl, 0, 2);
         amountData.add(intervall,0,2);
-        GridPane.setHalignment(intervall, HPos.CENTER);
-
 
 
         closeButton.setOnAction(new EventHandler<ActionEvent>() {

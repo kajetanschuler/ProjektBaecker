@@ -58,6 +58,7 @@ public class Calculator extends SerialController {
 
         double low;
         double high;
+        double difference;
         final double confidencecoefficient = 1.96; //95% confidence intervall -> 1.96 confidence coefficient
 
         //Calculating the lower bound
@@ -68,7 +69,16 @@ public class Calculator extends SerialController {
         high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
-        setLabelText("Konfidenzintervall zwischen " + lowgerundet + " und " + highgerundet,3);
+        //Todo: High-Low -> Differenz mit Mittelwert vergleichen -> Größer als Mittelwert
+
+        difference = high - low;
+
+        if (difference > dGewicht){
+            setLabelText("Ungenaue Messung!",3);
+        }
+
+
+        //setLabelText("Konfidenzintervall zwischen " + lowgerundet + " und " + highgerundet,3);
 
     }
 
