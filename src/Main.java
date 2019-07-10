@@ -1,19 +1,13 @@
-
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortEvent;
-import com.fazecast.jSerialComm.SerialPortPacketListener;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 public class Main extends Application {
 
@@ -68,7 +62,7 @@ public class Main extends Application {
                 NFCController nfcController = new NFCController(NFCPort);
             }
         };
-        nfcThread.start();
+       nfcThread.start();
 
     }
 

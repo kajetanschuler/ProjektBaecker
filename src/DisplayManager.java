@@ -45,7 +45,6 @@ public class DisplayManager {
     // Make GridLayout, Labels and Constraints
     public void initializeWindows () {
 
-
         // initialize 1st GridPane and Scene
 
         gridPane1 = new GridPane();
