@@ -12,6 +12,8 @@ public class ScaleController extends SerialController {
     private int sPort;
     private SerialPort comPort;
 
+    final double KORB_GEWICHT = 131.4;
+
     public ScaleController(Retoure retoure, int sPort) {
         this.retoure = retoure;
         this.sPort = sPort;
@@ -71,8 +73,10 @@ public class ScaleController extends SerialController {
         gewicht = gewicht.replaceAll("[^\\d.]", "");
         double wGewicht = Double.parseDouble(gewicht);
 
-        setLabelText("Gewicht: " + gewicht + "g", 1);
-        retoure.setGewicht(wGewicht);
+        double gewichtProdukt = wGewicht - KORB_GEWICHT;
+        setLabelText("Gewicht: " + gewichtProdukt + "g", 1);
+        retoure.setGewicht(gewichtProdukt);
+        System.out.println("Gewicht ohne Korb: " + gewichtProdukt);
         Main.startCalculator(retoure);
 
         if (wGewicht == 0.0) {
