@@ -8,8 +8,6 @@ public class Init {
         initializeArticleData();
     }
 
-    // Todo: Update predefined article data -> Excel
-
     // Function to initialize predefined article data
     private void initializeArticleData() {
         artikelData.add(new Artikel("Brezel", 135.59,2.16));

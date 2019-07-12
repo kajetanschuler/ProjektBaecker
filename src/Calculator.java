@@ -32,7 +32,6 @@ public class Calculator extends SerialController {
                     //7.3 -> Amount: 7; 7.6 -> Amount: 8
                     int anzahlgerundet = (int) Math.round(anzahl);
 
-                    //Todo: Ggf. Anzeigetext ändern
                     setLabelText(Integer.toString(anzahlgerundet) + " " + artikel,2);
 
 
@@ -55,10 +54,18 @@ public class Calculator extends SerialController {
      */
 
     public void calculateConfidenceInterval (int anzahl, double dGewicht, double sDeviation){
-
+        //ConfidenceInterval Anzahl
         double low;
         double high;
-        double difference;
+        //ConfidenceInterval Anzahl-1
+        double low2;
+        double high2;
+
+        //ConfidenceInterval Anzahl+1
+        double low3;
+        double high3;
+
+        //double difference;
         final double confidencecoefficient = 1.96; //95% confidence intervall -> 1.96 confidence coefficient
 
         //Calculating the lower bound
@@ -69,16 +76,27 @@ public class Calculator extends SerialController {
         high = (anzahl * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl) * sDeviation);
         double highgerundet = Math.round(high * 100.0) / 100.0;
 
-        //Todo: High-Low -> Differenz mit Mittelwert vergleichen -> Größer als Mittelwert
+        //Calculating the lower bound: Anzahl -1
+        low2 = ((anzahl-1) * dGewicht) - (confidencecoefficient * Math.sqrt(anzahl-1) * sDeviation);
+        double lowgerundet2 = Math.round(low2 * 100.0) / 100.0;
 
-        difference = high - low;
+        //Calculating the upper bound: Anzahl -1
+        high2 = ((anzahl-1) * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl-1) * sDeviation);
+        double highgerundet2 = Math.round(high2 * 100.0) / 100.0;
 
-        if (difference > dGewicht){
-            setLabelText("Ungenaue Messung!",3);
+        //Calculating the lower bound: Anzahl +1
+        low3 = ((anzahl+1) * dGewicht) - (confidencecoefficient * Math.sqrt(anzahl+1) * sDeviation);
+        double lowgerundet3 = Math.round(low3 * 100.0) / 100.0;
+
+        //Calculating the upper bound: Anzahl +1
+        high3 = ((anzahl+1) * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl+1) * sDeviation);
+        double highgerundet3 = Math.round(high3 * 100.0) / 100.0;
+
+        // Comparison of confidenceinterval results
+
+        if (lowgerundet < highgerundet2 || highgerundet > lowgerundet3){
+            setLabelText("Achtung: Anzahl kann abweichen!",3);
         }
-
-
-        //setLabelText("Konfidenzintervall zwischen " + lowgerundet + " und " + highgerundet,3);
 
     }
 

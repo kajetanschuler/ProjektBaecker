@@ -155,6 +155,7 @@ public class DisplayManager {
         gridPane3.add(amountData, 1,0);
         liveData.add(anzahl, 0, 2);
         amountData.add(intervall,0,2);
+        GridPane.setHalignment(intervall, HPos.CENTER);
 
 
         closeButton.setOnAction(new EventHandler<ActionEvent>() {
