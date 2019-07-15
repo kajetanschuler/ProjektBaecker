@@ -14,6 +14,10 @@ public class Retoure {
         this.artikel = artikel;
     }
 
+    public Retoure () {
+
+    }
+
     public int getFiliale() {
         return filiale;
     }
