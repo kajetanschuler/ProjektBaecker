@@ -74,6 +74,7 @@ public class ScaleController extends SerialController {
         double wGewicht = Double.parseDouble(gewicht);
 
         double gewichtProdukt = wGewicht - KORB_GEWICHT;
+        gewichtProdukt = Math.round(gewichtProdukt * 100.0) / 100.0;
         setLabelText("Gewicht: " + gewichtProdukt + "g", 1);
         retoure.setGewicht(gewichtProdukt);
         System.out.println("Gewicht ohne Korb: " + gewichtProdukt);
