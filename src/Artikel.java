@@ -1,3 +1,4 @@
+// Class to represent Article Details
 public class Artikel {
     private String artikel;
     private double dGewicht;

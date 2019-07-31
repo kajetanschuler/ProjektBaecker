@@ -16,9 +16,7 @@ public class NFCController extends SerialController {
         startNFC();
     }
 
-    /**
-     *
-     */
+    // Start NFC Readout
     public void startNFC() {
         SerialPort comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(115200);
@@ -113,10 +111,7 @@ public class NFCController extends SerialController {
         comPort.closePort();
     }*/
 
-    /**
-     *
-     * @param data
-     */
+    // Transform the String from NFC readout to make it usable for the program
     private void transformString(ArrayList<Character> data) {
 
         // Build String from Array List

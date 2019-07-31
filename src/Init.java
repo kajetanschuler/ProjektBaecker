@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+// Class to Initialize statistic data for products (only Brezel is using real data)
 public class Init {
     public static ArrayList<Artikel> artikelData;
 

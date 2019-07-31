@@ -21,9 +21,7 @@ public class ScaleController extends SerialController {
         startScale();
     }
 
-    /**
-     *
-     */
+    // Start Scale Readout
     public void startScale() {
         comPort = SerialPort.getCommPorts()[sPort];
         comPort.setBaudRate(9600);
@@ -60,6 +58,7 @@ public class ScaleController extends SerialController {
 
     }
 
+    // Transform String from the Scale Readout to make it usable for the program
     private void transformString(ArrayList<Character> data) {
         // Build String from Array List
         StringBuilder stringBuilder = new StringBuilder(data.size());
@@ -70,9 +69,11 @@ public class ScaleController extends SerialController {
         String gewicht = stringBuilder.toString();
         System.out.println(gewicht);
 
+        // Replace dots with nothing
         gewicht = gewicht.replaceAll("[^\\d.]", "");
         double wGewicht = Double.parseDouble(gewicht);
 
+        // Get real weight
         double gewichtProdukt = wGewicht - KORB_GEWICHT;
         setLabelText("Gewicht: " + gewichtProdukt + "g", 1);
         retoure.setGewicht(gewichtProdukt);

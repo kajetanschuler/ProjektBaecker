@@ -1,5 +1,6 @@
 import javafx.application.Platform;
 
+// Superclass to set label text from NFC and Scale Controller
 public class SerialController {
 
     public void setLabelText(String text, int labelId) {

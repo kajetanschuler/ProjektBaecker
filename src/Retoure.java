@@ -1,3 +1,4 @@
+// Class to represent a returned box with all details
 public class Retoure {
     private int filiale;
     private String artikel;

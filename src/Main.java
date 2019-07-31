@@ -31,6 +31,8 @@ public class Main extends Application {
     public static int scalePort;
     public int NFCPort;
 
+
+    // Starts program
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println(OS);
@@ -102,7 +104,7 @@ public class Main extends Application {
 
     }
 
-
+    // Start Calculator from other classes to calculate amount of products
     public static void startCalculator(Retoure retoure) {
         timelineNFC.pause();
         Calculator calculator = new Calculator(retoure);
@@ -119,7 +121,7 @@ public class Main extends Application {
 //   }
 
 
-
+    // get the correct Serial Port for NFC Readout
     private int getNFCPort() {
         String portName;
         if (OS.contains("windows")) {
@@ -156,6 +158,7 @@ public class Main extends Application {
 
     }
 
+    // get the correct Serial Port for Scale Readout
     public int getScalePort() {
         String portName;
         if (OS.contains("windows")) {

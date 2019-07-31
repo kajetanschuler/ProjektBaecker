@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+// Class to extend Label for easier dot animations
 public class LabelHelper extends Label {
     private Timeline timeline;
 
@@ -16,10 +17,12 @@ public class LabelHelper extends Label {
         return timeline;
     }
 
+    // set Timeline Object for this Label
     public void setTimeline(Timeline timeline) {
         this.timeline = timeline;
     }
 
+    // Stop animation
     public void pauseTimeline () {
         if (timeline != null) {
             timeline.pause();
@@ -27,6 +30,7 @@ public class LabelHelper extends Label {
 
     }
 
+    // Animate three appearing dots after given text
     public void animateLabelText(String initialText, String endText) {
         // create animation for NFC Label
         super.setText(initialText);
