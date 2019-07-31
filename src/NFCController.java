@@ -1,4 +1,5 @@
 import com.fazecast.jSerialComm.*;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.application.Platform;
 
 import java.io.InputStream;
@@ -10,9 +11,11 @@ public class NFCController extends SerialController {
     public ArrayList<Character> chars;
     private String fil;
     private int sPort;
+    private Retoure retoure;
 
-    public NFCController(int sPort) {
+    public NFCController(int sPort, Retoure retoure) {
         this.sPort = sPort;
+        this.retoure = retoure;
         startNFC();
     }
 
@@ -139,7 +142,8 @@ public class NFCController extends SerialController {
             fil = "Filiale: " + filiale + " - Artikel: " + artikel;
 
             // Create Retoure Object from extracted data
-            Retoure retoure = new Retoure(filiale, artikel);
+            retoure.setArtikel(artikel);
+            retoure.setFiliale(filiale);
 
             // Give Object to Main and start Scale Controller
             Main.startScaleController(retoure);

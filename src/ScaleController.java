@@ -15,6 +15,7 @@ public class ScaleController extends SerialController {
     final double KORB_GEWICHT = 131.4;
 
     public ScaleController(Retoure retoure, int sPort) {
+        this.retoure = null;
         this.retoure = retoure;
         this.sPort = sPort;
         animateLabel("Warte auf Gewicht", "Warte auf Gewicht . . .", 1);
@@ -75,12 +76,17 @@ public class ScaleController extends SerialController {
 
         // Get real weight
         double gewichtProdukt = wGewicht - KORB_GEWICHT;
+        gewichtProdukt = Math.round(gewichtProdukt * 100.0) / 100.0;
         setLabelText("Gewicht: " + gewichtProdukt + "g", 1);
         retoure.setGewicht(gewichtProdukt);
         System.out.println("Gewicht ohne Korb: " + gewichtProdukt);
-        Main.startCalculator(retoure);
 
-        if (wGewicht == 0.0) {
+        if (wGewicht > 0.0) {
+            Main.startCalculator(retoure);
+        }
+
+
+        if (wGewicht <= 0.0) {
             Main.displayManager.labelReset();
         }
 

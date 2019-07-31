@@ -6,6 +6,7 @@ public class Calculator extends SerialController {
     private Retoure retoure;
 
     public Calculator(Retoure retoure) {
+        this.retoure = null;
         this.retoure = retoure;
     }
 
@@ -33,7 +34,6 @@ public class Calculator extends SerialController {
                     int anzahlgerundet = (int) Math.round(anzahl);
 
                     setLabelText(Integer.toString(anzahlgerundet) + " " + artikel,2);
-
 
                     calculateConfidenceInterval(anzahlgerundet, dGewicht, sDeviation);
 

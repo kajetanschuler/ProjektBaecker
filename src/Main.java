@@ -61,7 +61,7 @@ public class Main extends Application {
 
        Thread nfcThread = new Thread() {
             public void run() {
-                NFCController nfcController = new NFCController(NFCPort);
+                NFCController nfcController = new NFCController(NFCPort, new Retoure());
             }
         };
        nfcThread.start();
