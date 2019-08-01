@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DisplayManager {
-    //private GridPane gridPane;
     private GridPane gridPane1;
     private GridPane gridPane2;
     private GridPane gridPane3;
@@ -26,7 +25,6 @@ public class DisplayManager {
     private LabelHelper anzahl;
     private LabelHelper intervall;
     private Timeline timeline;
-    //private ColumnConstraints cC;
     private ColumnConstraints cC1;
     private ColumnConstraints cC2;
     private ColumnConstraints cC3;
@@ -58,7 +56,6 @@ public class DisplayManager {
         // initialize  2nd GridPane and Scene
         gridPane2 = new GridPane();
         gridPane2.setGridLinesVisible(false);
-        //scene = new Scene(gridPane2);
 
         gridPane3 = new GridPane();
         gridPane3.setGridLinesVisible(false);
@@ -79,9 +76,6 @@ public class DisplayManager {
 
         cC4 = new ColumnConstraints();
         cC4.setPercentWidth(60);
-
-        //RowConstraints rc = new RowConstraints(50); Ggf um Höhe anzupassen
-
 
         gridPane1.getColumnConstraints().addAll(cC1);
 
@@ -138,6 +132,7 @@ public class DisplayManager {
         gridPane1.add(gridPane2,0,0);
         gridPane1.add(gridPane3,0,1);
 
+        //Set Gripane layout and add labels/bottons to Gridpane
 
         GridPane liveData = new GridPane();
         cC1.setPercentWidth(100);
@@ -191,10 +186,10 @@ public class DisplayManager {
                 intervall.setText(text);
                 break;
 
-
         }
-
     }
+
+    //Function for animating labels
 
     public void animateLabel (String initialText, String endText, int labelId) {
         switch(labelId) {
@@ -214,11 +209,10 @@ public class DisplayManager {
                 intervall.animateLabelText(initialText, endText);
                 break;
 
-
         }
     }
 
-    // Todo: Add function that adds GridPane live Data for reset and initialization
+    //Function for resetting labels
 
     public void labelReset() {
         Platform.runLater(new Runnable() {
@@ -232,8 +226,9 @@ public class DisplayManager {
             }
         });
 
-
     }
+
+    //Function for closing the program
 
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();

@@ -30,13 +30,10 @@ public class Calculator extends SerialController {
                 if (artikel.equals(retoure.getArtikel())) {
                     retoureGewicht = retoure.getGewicht();
                     double anzahl = retoureGewicht / dGewicht;
-                    //7.3 -> Amount: 7; 7.6 -> Amount: 8
                     int anzahlgerundet = (int) Math.round(anzahl);
-
                     setLabelText(Integer.toString(anzahlgerundet) + " " + artikel,2);
 
                     calculateConfidenceInterval(anzahlgerundet, dGewicht, sDeviation);
-
                 }
             }
 
@@ -44,8 +41,6 @@ public class Calculator extends SerialController {
             // Show error when amount cannot be calculated
             setLabelText("Amount of baked goods could not be calculated.",2);
         }
-
-
     }
 
     /**
@@ -54,18 +49,18 @@ public class Calculator extends SerialController {
      */
 
     public void calculateConfidenceInterval (int anzahl, double dGewicht, double sDeviation){
-        //ConfidenceInterval Anzahl
+        //ConfidenceInterval for Anzahl
         double low;
         double high;
-        //ConfidenceInterval Anzahl-1
+        //ConfidenceInterval for Anzahl-1
         double low2;
         double high2;
 
-        //ConfidenceInterval Anzahl+1
+        //ConfidenceInterval for Anzahl+1
         double low3;
         double high3;
 
-        //double difference;
+        //Definition of confidenceCoefficient
         final double confidencecoefficient = 1.96; //95% confidence intervall -> 1.96 confidence coefficient
 
         //Calculating the lower bound
@@ -92,7 +87,7 @@ public class Calculator extends SerialController {
         high3 = ((anzahl+1) * dGewicht) + (confidencecoefficient * Math.sqrt(anzahl+1) * sDeviation);
         double highgerundet3 = Math.round(high3 * 100.0) / 100.0;
 
-        // Comparison of confidenceinterval results
+        // Comparison of confidenceinterval results - Calculation of the intersection points
 
         if (lowgerundet < highgerundet2 || highgerundet > lowgerundet3){
             setLabelText("Achtung: Anzahl kann abweichen!",3);
